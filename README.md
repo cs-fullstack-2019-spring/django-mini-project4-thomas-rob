@@ -24,7 +24,7 @@ The user should have the following:
 - username
 - Password
 - dateAccountCreated (not user created)
-- rank (not user created)
+- rank (not user created. default is "grunt")
 
 The games they add should have the following:
 - name
@@ -32,3 +32,11 @@ The games they add should have the following:
 - dateMade (with validation)
 - ageLimit (with validation)
 - foreignKey to user
+
+### Challenge:
+A user's rank is "grunt" by default. Their rank should change based off of the information below:
+- After 5 games: Captain
+- After 10 games: Major
+- After 14 games: Colonel
+- After 20 games: Major General
+- After 50 games: General
