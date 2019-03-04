@@ -20,18 +20,19 @@ Your index page should either ask a user to log in, or take them to the logged i
 1 pt: Make it aesthetically pleasing
 
 ### Models
-The user should have the following:
+The game collector should have the following:
 - username
 - Password
 - dateAccountCreated (not user created)
 - rank (not user created. default is "grunt")
+- foreignKey to DjangoUser table
 
 The games they add should have the following:
 - name
 - developer
 - dateMade (with validation)
 - ageLimit (with validation)
-- foreignKey to user
+- foreignKey to game collector
 
 ### Challenge:
 A user's rank is "grunt" by default. Their rank should change based off of the information below:
