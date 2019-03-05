@@ -54,5 +54,7 @@ A user's rank is "grunt" by default. Their rank should change based off of the i
 - An example of grabbing an instance of a model from a logged in user. You'll have to do this to pass it to a foreign key
 
 <strong>Additional Resources</strong>
+
 MDN article: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Authentication
+
 Djanog Many to One article for foreign keys: https://docs.djangoproject.com/en/2.1/topics/db/examples/many_to_one/
