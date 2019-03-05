@@ -38,7 +38,7 @@ class GameModel(models.Model):
     name= models.CharField(max_length=200)
     developer= models.CharField(max_length=300)
     releaseDate= models.DateField(default=timezone.now())
-    esbrRating= models.CharField(20)
+    esbrRating= models.CharField(max_length=20)
     gameMakeIdKey= models.ForeignKey(GameCollectorModel,on_delete=models.PROTECT,blank=True,null=True)
 
     def __str__(self):
