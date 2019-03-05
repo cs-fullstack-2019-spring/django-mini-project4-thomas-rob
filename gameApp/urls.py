@@ -11,4 +11,6 @@ urlpatterns = [
     path('newGame/', views.newGame, name='newGame'),
     path('edit/', views.edit, name='edit'),
     path('edit/', views.delete, name= 'deleteForm'),
+    path('delete/<int:gameID>/', views.delete, name='delete'),
+    path('savedGame/',views.saveNewGame, name='saveGame')
 ]
