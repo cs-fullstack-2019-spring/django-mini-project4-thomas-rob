@@ -1,2 +1,4 @@
 *.iml/
 .idea/
+gameApp gameProject LICENSE manage.py README.md .iml
+.idea
