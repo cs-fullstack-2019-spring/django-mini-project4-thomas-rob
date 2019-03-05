@@ -10,9 +10,14 @@
     New Game
     {% endblock header %}
 </h1>
-Want to add a new game? {{user.gameCollection}}
+Want to add a new game? {{user.username}}
 <p><a href="{% url 'newGame' %}">New Game</a></p>
 <p><a href="{% url 'index' %}">Home</a></p>
+
+<form action="" method="post">
+    {{form.as_p}}
+    <button>Submit</button>
+</form>
 
 </body>
 </html>

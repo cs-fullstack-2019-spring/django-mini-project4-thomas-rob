@@ -29,14 +29,10 @@ def newUser(request):   #for adding a new user
         }
     return render(request,'gameApp/newUser.html',context)
 
-def name(request):
-    return render(request, 'gameApp/newUser.html')
-
-def developer(request):
-    return render(request, 'gameApp/newUser.html')
-
-def releaseDate(request):
-    return render(request, 'gameApp/newUser.html')
-
-def ratings(request):
-    return render(request, 'gameApp/newUser.html')
+def newGame(request):
+    gameForm = GameForm()
+    context = \
+        {
+            'form':gameForm
+        }
+    return render(request,'gameApp/newGame.html',context)
