@@ -7,28 +7,51 @@
 <body>
 <h1>
     {% block header %}
-Game List
+        {% if user.is_authenticated %}
+        Welcome {{user.username}}
+        {% else %}
+        Welcome To GameListers!
+        {% endif %}
     {% endblock header %}
 </h1>
-Welcome {{user.gameCollection}}
+
+{% block content %}
+{% if user.is_authenticated %}
 <p><a href="{% url 'logout' %}">Logout</a></p>
 <p><a href="{% url 'login' %}">Login</a>
 {% if gamelist %}
-<<<<<<< HEAD
     for game in gameList
     <p>
 {% else %}}
-=======
 {% else %}
->>>>>>> 1b8c18915caa62eb088c3888873a6c9b1d74ced6
 </p>
 <p><a href="{% url 'newUser' %}">New User?</a></p>
+
+
 <p><a href="newGame">New Game</a></p>
-<p><a href="edit">Edit</a></p>
-<p><a href="delete">Delete</a></p>
+{% if gameList %}
+<table border="2">
+    <tr>
+        <th>Game</th>
+        <th>Edit info</th>
+        <th>Delete Game</th>
+    </tr>
+    {% for game in gameList %}
+    <tr>
+        <td><a href="">{{game}}</a></td>
+        <td><a href="edit">Edit</a></td>
+        <td><a href="delete">Delete</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<h3>No games! Why not make one?</h3>
 {% endif %}
-{% block content %}
-Test Bloop!
+{% else %}
+<p><a href="{% url 'login' %}">Login</a>
+<p><a href="{% url 'newUser' %}">New User?</a></p>
+{% endif%}
+
 {% endblock content %}
 </body>
 </html>
