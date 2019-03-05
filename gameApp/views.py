@@ -5,11 +5,9 @@ from .forms import GameModel,GameCollectorModel,GameForm,GameCollectorForm  #cal
 from django.contrib.auth.models import User
 def index(request):  #for the rendering of the index page
     gameList = GameModel.objects.all()  # this collects all games made
-    # gameCollector = GameCollectorModel.objects.filter(userIDkey =request.user)  # this gets current logged in user
 
     context= \
         {
-#            'user':gameCollector,  #this converts the gamecollector to user
             'gameList':gameList   # this addes completed game list that will later filter out based on logged in user
         }
     return render(request,'gameApp/index.html',context)  # this renders the page and start at index
