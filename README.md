@@ -3,6 +3,8 @@
 ## Create an app to show off games
 Your index page should either ask a user to log in, or take them to the logged in user's collection.
 
+<strong>Comment EVERY line of your views.py file</strong>
+
 ### If logged out
 **Index Page:** User will see a welcome message and a link to log in and a link to create a new user.
 
