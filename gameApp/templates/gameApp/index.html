@@ -5,14 +5,21 @@
     <title>Home</title>
 </head>
 <body>
-User Collection
-Welcome
-<a href="login.html/">Login</a>
-<a href="newUser.html">New User?</a>
+<h1>
+    {% block header %}
+    {% endblock header %}
+</h1>
+{% if user.is_authenticated %}
+Welcome {{user.gameCollection}}
+<p><a href="{% url 'logout' %}">Logout</a></p>
+<p><a href="login.html/">Login</a>Game List</p>
+<p><a href="newUser.html">New User?</a></p>
+<p><a href="newGame">New Game</a></p>
+<p><a href="edit">Edit</a></p>
+<p><a href="delete">Delete</a></p>
+{% endif %}
+{% block content %}
+{% endblock content %}
 {% csrf token %}
-<a href="logout">Logout</a>
-<a href="newGame">New Game</a>
-<a href="edit">Edit</a>
-<a href="delete">Delete</a>
 </body>
 </html>
