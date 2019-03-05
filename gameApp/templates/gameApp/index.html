@@ -14,11 +14,15 @@ Welcome {{user.gameCollection}}
 <p><a href="{% url 'logout' %}">Logout</a></p>
 <p><a href="{% url 'login' %}">Login</a>
 {% if gamelist %}
+<<<<<<< HEAD
     for game in gameList
     <p>
 {% else %}}
+=======
+{% else %}
+>>>>>>> 1b8c18915caa62eb088c3888873a6c9b1d74ced6
 </p>
-<p><a href="newUser.html">New User?</a></p>
+<p><a href="{% url 'newUser' %}">New User?</a></p>
 <p><a href="newGame">New Game</a></p>
 <p><a href="edit">Edit</a></p>
 <p><a href="delete">Delete</a></p>
@@ -26,6 +30,5 @@ Welcome {{user.gameCollection}}
 {% block content %}
 Test Bloop!
 {% endblock content %}
-{% csrf_token %}
 </body>
 </html>

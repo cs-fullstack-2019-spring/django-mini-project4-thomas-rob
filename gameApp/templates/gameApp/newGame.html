@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Game</title>
+</head>
+<body>
+<h1>
+    {% block header %}
+    New Game
+    {% endblock header %}
+</h1>
+Want to add a new game? {{user.gameCollection}}
+<p><a href="{% url 'newGame' %}">New Game</a></p>
+<p><a href="{% url 'index' %}">Home</a></p>
+
+</body>
+</html>
