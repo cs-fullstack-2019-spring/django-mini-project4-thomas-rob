@@ -7,24 +7,17 @@
 <body>
 <h1>
     {% block header %}
-        {% if user.is_authenticated %}
-        Welcome {{user.username}}
-        {% else %}
-        Welcome To GameListers!
-        {% endif %}
+    {% if user.is_authenticated %}
+    Welcome {{user.username}}
+    {% else %}
+    Welcome To GameListers!
+    {% endif %}
     {% endblock header %}
 </h1>
 
 {% block content %}
 {% if user.is_authenticated %}
 <p><a href="{% url 'logout' %}">Logout</a></p>
-<p><a href="{% url 'login' %}">Login</a>
-{% if gamelist %}
-    for game in gameList
-    <p>
-{% else %}}
-{% else %}
-</p>
 <p><a href="{% url 'newUser' %}">New User?</a></p>
 
 
