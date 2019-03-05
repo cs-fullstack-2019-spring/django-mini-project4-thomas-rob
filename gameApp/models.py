@@ -43,3 +43,8 @@ class GameModel(models.Model):
 
     def __str__(self):
         return self.name
+
+class deleteForm(models.Model):
+
+    def __str__(self):
+        return self.name

@@ -3,6 +3,7 @@ from django.http import HttpResponse
 # Create your views here.
 from .forms import GameModel,GameCollectorModel,GameForm,GameCollectorForm  #called all forms in models in single line
 from django.contrib.auth.models import User
+from .models import GameModel, deleteForm
 def index(request):  #for the rendering of the index page
     gameList = GameModel.objects.all()  # this collects all games made
 
@@ -36,3 +37,15 @@ def newGame(request):
             'form':gameForm
         }
     return render(request,'gameApp/newGame.html',context)
+
+def edit(request):
+    editForm = GameModel()
+    context = \
+        {
+            'form':editForm
+        }
+    return render(request, 'gameApp/edit.html', context)
+
+def delete(request):
+    deleteForm = GameModel()
+    return render(request, 'gameApp/delete.html')
