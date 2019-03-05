@@ -8,7 +8,7 @@ Your index page should either ask a user to log in, or take them to the logged i
 
 **Log In Page:** The log in page will have a form to log in and redirect the user to the index as a logged in user.
 
-**Create a New User Page:** The create-a-new-user page allows a user to create a new user and redirects to the index.
+**Create a New User Page:** The create-a-new-user page allows a user to create a new user and redirects to the index. Make sure to validate password1 and password2 to confirm they match.
 
 ### If logged in
 **Index Page:** A logout and new game link should be near the top of the page. If the user has 0 games, show "No games". Otherwise list all games in their account. Next to each game in the user's account should be an edit and delete link. 
@@ -22,7 +22,8 @@ Your index page should either ask a user to log in, or take them to the logged i
 ### Models
 The game collector should have the following:
 - username
-- Password
+- Password1
+- Password2
 - dateAccountCreated (not user created)
 - rank (not user created. default is "grunt")
 - foreignKey to DjangoUser table
@@ -41,3 +42,17 @@ A user's rank is "grunt" by default. Their rank should change based off of the i
 - After 14 games: Colonel
 - After 20 games: Major General
 - After 50 games: General
+
+<strong>Note:</strong> Use some of the following code to get your code working:
+1) if request.user.is_authenticated:
+- If you need to see if a user is logged in under views
+2) {% if user.is_superuser %}
+- If you need to see if a user is logged in under html
+3) if request.user.is_superuser:
+- If you need to see if a user is a super user
+4) collector = CollectorModel.objects.get(username=request.user)
+- An example of grabbing an instance of a model from a logged in user. You'll have to do this to pass it to a foreign key
+
+<strong>Additional Resources</strong>
+MDN article: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Authentication
+Djanog Many to One article for foreign keys: https://docs.djangoproject.com/en/2.1/topics/db/examples/many_to_one/
