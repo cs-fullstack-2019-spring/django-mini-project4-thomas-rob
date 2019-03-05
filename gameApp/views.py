@@ -1,47 +1,49 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render , redirect,get_object_or_404    # pulling redirect
+from django.shortcuts import render, redirect, get_object_or_404  # pulling redirect
 from django.http import HttpResponse
 # Create your views here.
-from .forms import GameModel,GameCollectorModel,GameForm,GameCollectorForm  #called all forms in models in single line
+from .forms import GameModel, GameCollectorModel, GameForm, \
+    GameCollectorForm  # called all forms in models in single line
 from django.contrib.auth.models import User
+
 
 @login_required
 def index(request):  # for the rendering of the index page
-    user = GameCollectorModel.objects.filter()
-    gameList = GameModel.objects.filter()  # this collects all games made
-    context= \
+    gameList = GameModel.objects.all()  # this collects all games made
+    context = \
         {
-            'gameList':gameList   # this adds completed game list that will later filter out based on logged in user
+            'gameList': gameList  # this adds completed game list that will later filter out based on logged in user
         }
-    return render(request,'gameApp/index.html',context)  # this renders the page and start at index
+    return render(request, 'gameApp/index.html', context)  # this renders the page and start at index
 
 
-def newUser(request):   #for adding a new user
-    userForm = GameCollectorForm(request.POST or None)   #collects the form necessary to make a new user
+def newUser(request):  # for adding a new user
+    userForm = GameCollectorForm(request.POST or None)  # collects the form necessary to make a new user
 
     if userForm.is_valid():  # confirms that the parameters are met
-        if request.POST['password1'] == request.POST['password2']:  #adds aditional parameter
-            User.objects.create_user(request.POST['username'],'',request.POST['password1']) # saves the user for use later
-            userForm.save()   # saves the form for editing later
-            return redirect('index')  #returns person to index
-
+        if request.POST['password1'] == request.POST['password2']:  # adds aditional parameter
+            User.objects.create_user(request.POST['username'], '',
+                                     request.POST['password1'])  # saves the user for use later
+            userForm.save()  # saves the form for editing later
+            return redirect('index')  # returns person to index
 
     context = \
         {
-            'form':userForm  # gets the form to add new user and uses an easy to read name
+            'form': userForm  # gets the form to add new user and uses an easy to read name
         }
-    return render(request,'gameApp/newUser.html',context)
+    return render(request, 'gameApp/newUser.html', context)
 
-def newGame(request):
-    gameForm = GameForm()
+
+def newGame(request):  # this will render the newgame page to save a new game
+    gameForm = GameForm()  # this collects the form to use
     context = \
         {
-            'form':gameForm
+            'form': gameForm  # this changed the name to fit the context for easy to input
         }
-    return render(request,'gameApp/newGame.html',context)
+    return render(request, 'gameApp/newGame.html', context)
 
 
-def saveNewGame(request):
-    gameForm = GameForm(request.POST)
-    gameForm.save()
-    return redirect('index')
+def saveNewGame(request):  # this will upon submitting a newgame save it and redirect to the index
+    gameForm = GameForm(request.POST)  # collects the data inputed by user to be saved
+    gameForm.save()  # saves the data for future use
+    return redirect('index')  # goes back to the index page

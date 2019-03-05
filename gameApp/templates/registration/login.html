@@ -2,6 +2,7 @@
 
 {% block header %}
 Log in Here
+
 {% endblock header %}
 
 {% block content %}
@@ -35,5 +36,6 @@ Log in Here
     <input type="submit" value="login" />
     <input type="hidden" name="next" value="{{ next }}" />
 </form>
+<p><a href="{% url 'newUser' %}">New User?</a></p>
 
 {% endblock content %}
