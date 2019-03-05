@@ -18,11 +18,11 @@ def index(request):  #for the rendering of the index page
 def newUser(request):   #for adding a new user
     userForm = GameCollectorForm(request.POST or None)   #collects the form necessary to make a new user
 
-    if userForm.is_valid():
-        if request.POST['password1'] == request.POST['password2']:
-            User.objects.create_user(request.POST['username'],'',request.POST['password1'])
-            userForm.save()
-            return HttpResponse('New User Created')
+    if userForm.is_valid():  # confirms that the parameters are met
+        if request.POST['password1'] == request.POST['password2']:  #adds aditional parameter
+            User.objects.create_user(request.POST['username'],'',request.POST['password1']) # saves the user for use later
+            userForm.save()   # saves the form for editing later
+            return redirect('index')  #returns person to index
 
 
     context = \
