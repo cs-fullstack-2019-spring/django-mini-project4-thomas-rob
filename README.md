@@ -14,10 +14,10 @@ Your index page should either ask a user to log in, or take them to the logged i
 **Index Page:** A logout and new game link should be near the top of the page. If the user has 0 games, show "No games". Otherwise list all games in their account. Next to each game in the user's account should be an edit and delete link. 
 
 ### Point Scale
-1 pt: Index while Logged Out/Create User/Log in pages
-1 pt: List all games and add a new game
-1 pt: Edit and delete games
-1 pt: Make it aesthetically pleasing
+- 1 pt: Index while Logged Out/Create User/Log in pages
+- 1 pt: List all games and add a new game
+- 1 pt: Edit and delete games
+- 1 pt: Make it aesthetically pleasing
 
 ### Models
 The game collector should have the following:
