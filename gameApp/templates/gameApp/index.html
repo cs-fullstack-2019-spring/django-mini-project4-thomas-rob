@@ -33,7 +33,7 @@
     <tr>
         <td><a href="">{{ game }}</a></td>
         <td><a href="edit">Edit</a></td>
-        <td><a href="delete">Delete</a></td>
+        <td><a href="{% url 'delete' game.id %}">Delete</a></td>
     </tr>
     {% endfor %}
 </table>

@@ -5,6 +5,9 @@ from django.http import HttpResponse
 from .forms import GameModel, GameCollectorModel, GameForm, \
     GameCollectorForm  # called all forms in models in single line
 from django.contrib.auth.models import User
+from .models import GameModel, deleteForm
+def index(request):  #for the rendering of the index page
+    gameList = GameModel.objects.all()  # this collects all games made
 
 
 @login_required
@@ -42,8 +45,25 @@ def newGame(request):  # this will render the newgame page to save a new game
         }
     return render(request, 'gameApp/newGame.html', context)
 
+def edit(request, gameID):
+    editForm = get_object_or_404(GameModel, pk=gameID)
+    context = \
+        {
+            'form':editForm
+        }
+    return render(request, 'gameApp/edit.html', context)
+
+def delete(request, gameID):
+    deleteForm = get_object_or_404(GameModel, pk=gameID)
+    deleteForm.delete()
+    return redirect('index')
 
 def saveNewGame(request):  # this will upon submitting a newgame save it and redirect to the index
     gameForm = GameForm(request.POST)  # collects the data inputed by user to be saved
     gameForm.save()  # saves the data for future use
     return redirect('index')  # goes back to the index page
+
+def saveNewGame(request):
+    gameForm = GameForm(request.POST)
+    gameForm.save()
+    return redirect('index')
