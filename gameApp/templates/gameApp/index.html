@@ -7,18 +7,22 @@
 <body>
 <h1>
     {% block header %}
+Game List
     {% endblock header %}
 </h1>
-{% if user.is_authenticated %}
 Welcome {{user.gameCollection}}
 <p><a href="{% url 'logout' %}">Logout</a></p>
-<p><a href="login.html/">Login</a>Game List</p>
+<p><a href="login.html/">Login</a>
+{% if gamelist %}
+{% else %}}
+</p>
 <p><a href="newUser.html">New User?</a></p>
 <p><a href="newGame">New Game</a></p>
 <p><a href="edit">Edit</a></p>
 <p><a href="delete">Delete</a></p>
 {% endif %}
 {% block content %}
+Test Bloop!
 {% endblock content %}
 {% csrf_token %}
 </body>

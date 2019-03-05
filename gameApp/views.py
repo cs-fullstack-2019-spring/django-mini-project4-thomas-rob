@@ -9,7 +9,7 @@ def index(request):  #for the rendering of the index page
 
     context= \
         {
-            # 'user':gameCollector,  #this converts the gamecollector to user
+#            'user':gameCollector,  #this converts the gamecollector to user
             'gameList':gameList   # this addes completed game list that will later filter out based on logged in user
         }
     return render(request,'gameApp/index.html',context)  # this renders the page and start at index
