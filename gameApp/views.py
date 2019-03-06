@@ -75,7 +75,7 @@ def saveNewGame(request):  # this will upon submitting a newgame save it and red
     gameForm = GameForm(request.POST)
     # print(gameForm)
     # collects the data inputed by user to be saved
-    newGame = gameForm.save()  # saves the data for future use
+    newGame = gameForm.save(commit=None)  # saves the data for future use
     newGame.gameMakeIdKey=gameCollector
     newGame.save()
     return redirect('index')  # goes back to the index page
