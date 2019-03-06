@@ -22,9 +22,6 @@
 {% block content %}
 {% if user.is_authenticated %}
 <p><a href="{% url 'logout' %}">Logout</a></p>
-<p><a href="{% url 'newUser' %}">New User?</a></p>
-
-
 <p><a href="newGame">New Game</a></p>
 {% if gameList %}
 <table border="2">
@@ -35,7 +32,7 @@
     </tr>
     {% for game in gameList %}
     <tr>
-        <td><a href="">{{ game }}</a></td>
+        <td>{{ game }}</td>
         <td><a href="{% url 'edit' game.id %}">Edit</a></td>
         <td><a href="{% url 'delete' game.id %}">Delete</a></td>
     </tr>
@@ -48,7 +45,6 @@
 <p><a href="{% url 'login' %}">Login</a>
 <p><a href="{% url 'newUser' %}">New User?</a></p>
 {% endif%}
-
 {% endblock content %}
 </div>
 </body>

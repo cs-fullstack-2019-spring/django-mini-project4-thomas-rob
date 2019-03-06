@@ -17,7 +17,6 @@ def index(request):  # for the rendering of the index page
     if request.user.is_authenticated:  # makes sure the user is logged in to authorize this existing
         gameCollector = GameCollectorModel.objects.get(userIDkey=request.user)  # this gets the game collector
         gameList = GameModel.objects.filter(gameMakeIdKey=gameCollector)  # this gets the list of games that person did
-
     else:
         gameList = ''  # sets gamelist to empty so no games will be displayed
 
