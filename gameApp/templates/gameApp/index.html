@@ -6,7 +6,8 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'gameApp/style.css' %}">
 </head>
-<body>
+<div>
+<header>
 <h1>
     {% block header %}
     {% if user.is_authenticated %}
@@ -16,7 +17,8 @@
     {% endif %}
     {% endblock header %}
 </h1>
-
+</header>
+<div>
 {% block content %}
 {% if user.is_authenticated %}
 <p><a href="{% url 'logout' %}">Logout</a></p>
@@ -48,5 +50,6 @@
 {% endif%}
 
 {% endblock content %}
+</div>
 </body>
 </html>
