@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from .forms import GameModel, GameCollectorModel, GameForm, \
     GameCollectorForm  # called all forms in models in single line
 from django.contrib.auth.models import User
-from .models import GameModel, deleteForm
+from .models import GameModel
 def index(request):  #for the rendering of the index page
     gameList = GameModel.objects.all()  # this collects all games made
 

@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
 from . import views
-from .models import deleteForm
 
 urlpatterns = [
     path('', views.index, name='index'),
