@@ -12,12 +12,13 @@ def index(request):  #for the rendering of the index page
 
 # @login_required
 def index(request):  # for the rendering of the index page
-    if request.user == 'AnonymousUser':
-        gameCollector=''
-        gameList=''
-    else:
+    if request.user.is_authenticated:  #makes sure the user is logged in to authorize this existing
         gameCollector = GameCollectorModel.objects.get(userIDkey=request.user)  # this gets the game collector
         gameList = GameModel.objects.filter(gameMakeIdKey=gameCollector)  #this gets the list of games that person did
+
+    else:
+        gameList=''  #sets gamelist to empty so no games will be displayed
+
     context = \
         {
             'gameList': gameList  # this adds completed game list that will later filter out based on logged in user
@@ -27,15 +28,13 @@ def index(request):  # for the rendering of the index page
 
 def newUser(request):  # for adding a new user
     userForm = GameCollectorForm(request.POST or None)  # collects the form necessary to make a new user
-
     if userForm.is_valid():  # confirms that the parameters are met
         if request.POST['password1'] == request.POST['password2']:  # adds aditional parameter
-            User.objects.create_user(request.POST['username'], '',request.POST['password1'])  # saves the user for use later
-            userForm.save()  # saves the form for editing later
-             # this adds the user as the link for the foreignKey
-             #saves the foreignKey
+            newUser = User.objects.create_user(request.POST['username'], '',request.POST['password1'])  # saves the user for use later
+            collector = userForm.save(commit=None) #saves the model
+            collector.userIDkey = newUser
+            collector.save()  # saves the form for editing later
             return redirect('index')  # returns person to index
-
     context = \
         {
             'form': userForm  # gets the form to add new user and uses an easy to read name
@@ -69,11 +68,9 @@ def delete(request, gameID):
     deleteForm.delete()
     return redirect('index')
 
-@login_required
 def saveNewGame(request):  # this will upon submitting a newgame save it and redirect to the index
     gameCollector = GameCollectorModel.objects.get(userIDkey=request.user)  # this gets the game collector
     gameForm = GameForm(request.POST)
-    # print(gameForm)
     # collects the data inputed by user to be saved
     newGame = gameForm.save(commit=None)  # saves the data for future use
     newGame.gameMakeIdKey=gameCollector
