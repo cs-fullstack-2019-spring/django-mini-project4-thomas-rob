@@ -10,9 +10,14 @@ def index(request):  #for the rendering of the index page
     gameList = GameModel.objects.all()  # this collects all games made
 
 
-@login_required
+# @login_required
 def index(request):  # for the rendering of the index page
-    gameList = GameModel.objects.all()  # this collects all games made
+    if request.user == 'AnonymousUser':
+        gameCollector=''
+        gameList=''
+    else:
+        gameCollector = GameCollectorModel.objects.get(userIDkey=request.user)  # this gets the game collector
+        gameList = GameModel.objects.filter(gameMakeIdKey=gameCollector)  #this gets the list of games that person did
     context = \
         {
             'gameList': gameList  # this adds completed game list that will later filter out based on logged in user
@@ -25,9 +30,10 @@ def newUser(request):  # for adding a new user
 
     if userForm.is_valid():  # confirms that the parameters are met
         if request.POST['password1'] == request.POST['password2']:  # adds aditional parameter
-            User.objects.create_user(request.POST['username'], '',
-                                     request.POST['password1'])  # saves the user for use later
+            User.objects.create_user(request.POST['username'], '',request.POST['password1'])  # saves the user for use later
             userForm.save()  # saves the form for editing later
+             # this adds the user as the link for the foreignKey
+             #saves the foreignKey
             return redirect('index')  # returns person to index
 
     context = \
@@ -46,24 +52,30 @@ def newGame(request):  # this will render the newgame page to save a new game
     return render(request, 'gameApp/newGame.html', context)
 
 def edit(request, gameID):
-    editForm = get_object_or_404(GameModel, pk=gameID)
+    item = get_object_or_404(GameModel, pk=gameID)
+    editForm = GameForm( instance=item)
+
     context = \
         {
             'form':editForm
         }
-    return render(request, 'gameApp/edit.html', context)
+    if request.method == 'POST':
+        editForm.save()
+        return (request, 'gameApp/editForm.html', context)
+    return render(request, 'gameApp/editForm.html', context)
 
 def delete(request, gameID):
     deleteForm = get_object_or_404(GameModel, pk=gameID)
     deleteForm.delete()
     return redirect('index')
 
+@login_required
 def saveNewGame(request):  # this will upon submitting a newgame save it and redirect to the index
-    gameForm = GameForm(request.POST)  # collects the data inputed by user to be saved
-    gameForm.save()  # saves the data for future use
-    return redirect('index')  # goes back to the index page
-
-def saveNewGame(request):
+    gameCollector = GameCollectorModel.objects.get(userIDkey=request.user)  # this gets the game collector
     gameForm = GameForm(request.POST)
-    gameForm.save()
-    return redirect('index')
+    # print(gameForm)
+    # collects the data inputed by user to be saved
+    newGame = gameForm.save(commit=None)  # saves the data for future use
+    newGame.gameMakeIdKey=gameCollector
+    newGame.save()
+    return redirect('index')  # goes back to the index page

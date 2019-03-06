@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'gameApp/style.css' %}">
 </head>
 <body>
 <h1>
@@ -32,7 +34,7 @@
     {% for game in gameList %}
     <tr>
         <td><a href="">{{ game }}</a></td>
-        <td><a href="edit">Edit</a></td>
+        <td><a href="{% url 'edit' game.id %}">Edit</a></td>
         <td><a href="{% url 'delete' game.id %}">Delete</a></td>
     </tr>
     {% endfor %}

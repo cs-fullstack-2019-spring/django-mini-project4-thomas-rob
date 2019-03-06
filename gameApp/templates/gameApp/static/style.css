@@ -1,0 +1,24 @@
+li a {
+    color: black;
+}
+header{
+    font-size: 50px;
+    color: red;
+}
+body{
+    background: black;
+    text-align: center;
+}
+#nav1{
+    background: red;
+    text-align: left;
+}#nav2{
+    background: red;
+    text-align: left;
+}#nav3{
+    background: red;
+    text-align: left;
+}
+ form{
+     border: 1.5px;
+ }
